@@ -8,9 +8,9 @@ use Throwable;
 
 class BusinessException extends \RuntimeException
 {
-    private $userMessage;
+    private string $userMessage;
 
-    public function __construct($message, array $params)
+    public function __construct(string $message, array $params)
     {
         $this->userMessage = $message;
         parent::__construct('Business exception');

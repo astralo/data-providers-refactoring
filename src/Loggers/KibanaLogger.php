@@ -11,7 +11,7 @@ class KibanaLogger implements LoggerInterface
     /**
      * @param string $message
      */
-    public function critical(string $message)
+    public function critical(string $message): void
     {
         // TODO: Implement critical() method.
     }

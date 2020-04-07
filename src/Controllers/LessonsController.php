@@ -11,15 +11,8 @@ use App\Responses\Formatters\ResponseFormatter;
 
 class LessonsController
 {
-    /**
-     * @var \Psr\Log\LoggerInterface
-     */
-    public $logger;
-
-    /**
-     * @var DataProviderService
-     */
-    public $dataProviderService;
+    public \Psr\Log\LoggerInterface $logger;
+    public DataProviderService $dataProviderService;
 
     public function __construct(
         DataProviderService $dataProviderService
@@ -36,7 +29,7 @@ class LessonsController
      *
      * @return string
      */
-    public function action($cat, string $responseFormat = 'json')
+    public function action(int $cat, string $responseFormat = null): string
     {
         try {
             if (!$this->validateCategory($cat)) {

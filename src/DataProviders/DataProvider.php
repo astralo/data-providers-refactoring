@@ -6,20 +6,9 @@ namespace App\DataProviders;
 
 class DataProvider implements DataProviderInterface
 {
-    /**
-     * @var string
-     */
-    private $host;
-
-    /**
-     * @var string
-     */
-    private $user;
-
-    /**
-     * @var string
-     */
-    private $password;
+    private string $host;
+    private string $user;
+    private string$password;
 
     /**
      * @param string $host

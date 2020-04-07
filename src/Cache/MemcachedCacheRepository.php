@@ -11,7 +11,7 @@ class MemcachedCacheRepository implements CacheItemPoolInterface
     /**
      * @param string $cacheKey
      */
-    public function getItem(string $cacheKey)
+    public function getItem(string $cacheKey): void
     {
         // TODO: Implement getItem() method.
     }

@@ -11,20 +11,17 @@ use Psr\Cache\CacheItemPoolInterface;
 
 class DataProviderService
 {
-    /**
-     * @var array
-     */
-    private $config;
+    private array $config;
+    private \Psr\Log\LoggerInterface $logger;
+    private MemcachedCacheRepository $memcachedCacheRepository;
 
-    /**
-     * @var \Psr\Log\LoggerInterface
-     */
-    private $logger;
-
-    public function __construct()
+    public function __construct(
+        MemcachedCacheRepository $memcachedCacheRepository
+    )
     {
         $this->logger = Logger::getInstance();
         $this->config = config();
+        $this->memcachedCacheRepository = $memcachedCacheRepository;
     }
 
     /**
@@ -39,7 +36,7 @@ class DataProviderService
         );
 
         if ($this->config['production']) {
-            return new CacheDataProviderDecorator($dataProvider, new MemcachedCacheRepository());
+            return new CacheDataProviderDecorator($dataProvider, $this->memcachedCacheRepository);
         }
         return $dataProvider;
     }
@@ -53,8 +50,6 @@ class DataProviderService
     {
         $dataProvider = $this->getDataProvider();
 
-        $result = $dataProvider->get($params);
-
-        return $result;
+        return $dataProvider->get($params);
     }
 }
